@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
 # Context, this script is for browse and search stuff from command-line
-input_string=$1
+platform=$1
+
+input_string=$2
 
 declare -a words_array
 
@@ -13,17 +15,33 @@ read -ra words_array <<< "$input_string"
 
 IFS=$OLD_IFS
 
-final_search="https://www.google.com/search?client=firefox-b-d&q="
+google="https://www.google.com/search?client=firefox-b-d&q="
+youtube="https://www.youtube.com/results?search_query="
 
-for word in "${words_array[@]}"; do
-  final_search+="$word+"
-done
+final_search=""
 
-if ps -A | grep -q "firefox"; then
-  xdg-open $final_search
-else
-  firefox > /dev/null 2>&1 &
-  sleep 1
-  xdg-open $final_search
+browse () {
+  if ps -A | grep -q "firefox"; then
+    xdg-open $1
+  else
+    nohup firefox >/dev/null 2>&1 &
+    sleep 2
+    xdg-open $1
+  fi
+}
+
+if [ "$platform" == "--google" ]; then
+  for word in "${words_array[@]}"; do
+    google+="$word+"
+  done
+  browse $google
+elif [ "$platform" == "--youtube" ]; then
+  for word in "${words_array[@]}"; do
+    youtube+="$word+"
+  done
+  browse $youtube
+else 
+  echo 'only --google, --youtube valid options.'
 fi
 
+exit 0
