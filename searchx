@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+# Context, this script is for browse and search stuff from command-line
+input_string=$1
+
+declare -a words_array
+
+OLD_IFS=$IFS
+
+IFS=' '
+
+read -ra words_array <<< "$input_string"
+
+IFS=$OLD_IFS
+
+final_search="https://www.google.com/search?client=firefox-b-d&q="
+
+for word in "${words_array[@]}"; do
+  final_search+="$word+"
+done
+
+if ps -A | grep -q "firefox"; then
+  xdg-open $final_search
+else
+  firefox > /dev/null 2>&1 &
+  sleep 1
+  xdg-open $final_search
+fi
+
