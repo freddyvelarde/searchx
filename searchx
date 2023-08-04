@@ -57,7 +57,7 @@ elif [ "$platform" == "--spotify" ]; then
   done
   browse "$spotify"
 else 
-  echo 'only --google, --youtube, --google-img valid options.'
+  echo 'only --google, --youtube, --google-img, --unsplash, --spotify are valid options.'
 fi
 
 exit 0
