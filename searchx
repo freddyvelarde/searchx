@@ -20,6 +20,7 @@ youtube="https://www.youtube.com/results?search_query="
 google_images="https://www.google.com/search?q="
 unsplash="https://unsplash.com/s/photos/"
 spotify="https://open.spotify.com/search/"
+translate="https://translate.google.com/?sl=en&tl=es&text="
 
 browse () {
   if ps -A | grep -q "firefox"; then
@@ -56,8 +57,13 @@ elif [ "$platform" == "--spotify" ]; then
     spotify+="$word%20"
   done
   browse "$spotify"
+elif [ "$platform" == "--translate" ]; then
+  for word in "${words_array[@]}"; do
+    translate+="$word%20"
+  done
+  browse "$translate&op=translate"
 else 
-  echo 'only --google, --youtube, --google-img, --unsplash, --spotify are valid options.'
+  echo 'only --google, --youtube, --google-img, --unsplash, --spotify, --translate are valid options.'
 fi
 
 exit 0
