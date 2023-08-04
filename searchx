@@ -37,27 +37,27 @@ if [ "$platform" == "--google" ]; then
     google+="$word+"
   done
   browse $google
-elif [ "$platform" == "--youtube" ]; then
+elif [ "$platform" == "--youtube" ] || [ "$platform" == "-y" ]; then
   for word in "${words_array[@]}"; do
     youtube+="$word+"
   done
   browse $youtube
-elif [ "$platform" == "--google-img" ]; then
+elif [ "$platform" == "--google-img" ] || [ "$platform" == "-gi" ] ; then
   for word in "${words_array[@]}"; do
     google_images+="$word+"
   done
   browse "$google_images&tbm=isch&ved=2ahUKEwjRqcy80cGAAxU5JLkGHa5IDYwQ2-cCegQIABAA&oq=Audra+miller+nice+ass&gs_lcp=CgNpbWcQDFAAWABgAGgAcAB4AIABAIgBAJIBAJgBAKoBC2d3cy13aXotaW1n&sclient=img&ei=WTfMZJGZJbnI5OUPrpG14Ag&bih=761&biw=1430&client=firefox-b-d"
-elif [ "$platform" == "--unsplash" ]; then
+elif [ "$platform" == "--unsplash" ] || [ "$platform" == "-u" ]; then
   for word in "${words_array[@]}"; do
     unsplash+="$word-"
   done
   browse "$unsplash"
-elif [ "$platform" == "--spotify" ]; then
+elif [ "$platform" == "--spotify" ] || [ "$platform" == "-s" ]; then
   for word in "${words_array[@]}"; do
     spotify+="$word%20"
   done
   browse "$spotify"
-elif [ "$platform" == "--translate" ]; then
+elif [ "$platform" == "--translate" ] || [ "$platform" == "-t" ]; then
   for word in "${words_array[@]}"; do
     translate+="$word%20"
   done
